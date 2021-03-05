@@ -1,47 +1,61 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-const path = require('path');
 const db = require('../../config/db');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 router.get('/', (req, res) => {
-    // res.sendFile(path.join(__dirname, "../../public/register.html"));
     let msg;
     const errMsg = req.flash('error');
     if(errMsg) msg = errMsg;
     res.render('register.ejs', {'message': msg});
 })
 
-// passport.serialize
+passport.serializeUser((user, done) => {
+    console.log('passport session : ', user.id)
+    done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+    console.log('passport session get : ', id)
+    done(null, id);
+})
 
 passport.use('local-register', new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-    passReqToCallback: true
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
     },
     (req, email, password, done) => {
         // console.log('passport callback!');
-        const query = db.query(`select * from user where EMAIL=?`, [email], (err, rows) => {
+        const name = req.body.name;
+        const confirm = req.body.confirm;
+        
+        db.query(`select * from user where EMAIL=?`, [email], (err, rows) => {
             if(err) return done(err);
 
             if(rows.length){
                 console.log('existed user');
-                return done(null, false, {message: 'your email is already used'})
+                return done(null, false, {message: 'Your email is already used'})
             } else {
-                const query2 = db.query(`insert into user (EMAIL, PW) values (?, ?)`, [email, password], (err, rows) => {
-                    if(err) throw err;
-                    return done(null, {'email': email, 'id': rows.insertId});
-                })
+                if(password !== confirm) {
+                    console.log('wrong password');
+                    return done(null, false, {message: 'Passwords do not match'}) 
+                } else {
+                    db.query(`insert into user (EMAIL, userName, PW) values (?, ?, ?)`, [email, name, password], (err, rows) => {
+                        if(err) throw err;
+                        return done(null, {'email': email, 'id': rows.insertId});
+                    });
+                }
             }
-        })
+        });
     }
 ))
 
 router.post('/', passport.authenticate('local-register', {
     successRedirect: '/main',
-    failureRedirect: '/join',
+    failureRedirect: '/register',
     failureFlash: true
 }))
 

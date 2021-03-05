@@ -4,15 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>resgister</title>
-    <style>
-        .messages{
-            color: blue;
-            margin-bottom: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>Resgister</title>
 </head>
 <body>
+    <h1>Register Page</h1>
+    <div class="formWrap">
+        <form action="/register" method="post">
+            <div class="inputWrap">
+                <div class="email">
+                    <span> Email </span> <input type="text" name="email"><br/>
+                </div>
+                <div class="email">
+                    <span> Name </span> <input type="text" name="name"><br/>
+                </div>
+                <div class="email">
+                    <span> Password </span> <input type="password" name="password"><br/>
+                </div>
+                <div class="password">
+                    <span> Confirm </span> <input type="password" name="confirm"><br/>
+                </div>
+            </div>
+            <input class="sendbtn" type="submit">
+       </form>
+    </div>
+
+    <section class="result"> <%= message %> </section>
+    
+</body>
+<!-- <body>
     <h1>Register My Website!</h1>
     <section class="messages"> <%= message %></section>
 
@@ -22,5 +42,5 @@
         <input type="submit">
     </form>
 
-</body>
+</body> -->
 </html>

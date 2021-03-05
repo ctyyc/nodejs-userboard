@@ -28,19 +28,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + "/public/main.html");
-})
-
+// Router
 app.use(router);
 
 
 
-// server port
-const port = 3000
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.listen('3000', () => {
+  console.log(`Example app listening at http://localhost:3000`)
 })
