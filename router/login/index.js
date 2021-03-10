@@ -16,12 +16,12 @@ router.get('/', (req, res) => {
 
 // passport.serialize
 passport.serializeUser((user, done) => {
-    console.log('passport session : ', user.id)
+    console.log('passport session(serializeUser) : ', user.id)
     done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-    console.log('passport session get : ', id)
+    console.log('passport session(deserializeUser) : ', id)
     done(null, id);
 })
 

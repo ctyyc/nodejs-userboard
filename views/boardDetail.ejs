@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>board list</title>
+    </head>
+    <body>
+
+    <h1>Article Deatil</h1>
+
+    <div>No. <%= data[0].articleNo %></div>
+    <div>Title : <%= data[0].articleTitle %></div>
+    <div>Contents : <%= data[0].articleContents %></div>
+    <div>RegDate : <%= data[0].regDate %></div>
+    <div>Author : <%= data[0].userName %>(<%= data[0].EMAIL %>)</div>
+
+    <% if(data[0].userId === id) { %>
+        <br/>
+        <a href="/board/save/<%= data[0].articleNo %>">Update</a>
+        <br/>
+        <form action="/board/detail/<%= data[0].articleNo %>?_method=DELETE" method="POST">
+            <button>Delete</button>
+        </form>
+    <% } %>
+
+    <br/>
+    <a href="/board">Go to list</a>
+    </body>
+</html>

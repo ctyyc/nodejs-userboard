@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>board list</title>
+    </head>
+    <body>
+
+    <header>
+        <div> <%= userInfo[0].userName %>(<%= userInfo[0].EMAIL %>)님 반갑습니다^^</div>
+        <div><a href="/logout">logout</a></div>
+    </header>
+
+    <h1>Board List</h1>
+
+    <% for(let i=0; i<data.length; i++){ %>
+        <a href="/board/detail/<%= data[i].articleNo %>"><%= data[i].articleTitle %></a>
+        <br/>
+    <% } %>
+
+    <br/>
+    <a href="/board/save">Create Article</a>
+    </body>
+</html>

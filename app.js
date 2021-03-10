@@ -9,6 +9,9 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const flash = require('connect-flash');
+const methodOverride = require('method-override');
+
+app.use(methodOverride('_method'));
 
 // 해당 디렉토리의 모든 static 파일을 url로 접근할 수 있음
 app.use(express.static('public'));

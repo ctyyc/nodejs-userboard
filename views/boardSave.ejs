@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>board save</title>
+    </head>
+    <body>
+
+    <h1>Save Article</h1>
+
+    <% if(data){ %>
+        <form action="/board/save/<%= data[0].articleNo %>?_method=PUT" method="post">
+            <div>제목 : <input type="textarea" name="articleTitle" placeholder="Title" value="<%= data[0].articleTitle %>"> </div>
+            <div>내용 : <input type="textarea" name="articleContents" placeholder="Contents" value="<%= data[0].articleContents %>"> </div>
+            
+            <input type="submit">
+        </form>
+    <% } else { %>
+        <form action="/board/save" method="post">
+            <div>제목 : <input type="textarea" name="articleTitle" placeholder="Title"> </div>
+            <div>내용 : <input type="textarea" name="articleContents" placeholder="Contents"> </div>
+            
+            <input type="submit">
+        </form>
+    <% } %>
+
+    <br/>
+    <a href="/board">Go to list</a>
+    </body>
+</html>
