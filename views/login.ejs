@@ -4,32 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/ui.css">
     <title>Login</title>
 </head>
 <body>
-    <h1>Login</h1>
-    <div class="formWrap">
+    <div class="center-div">
+        <h1>Login</h1>
+        <br/>
+        
         <form action="" method="post">
-            <div class="inputWrap">
-                <div class="email">
-                    <span> Email </span> <input type="text" name="email"><br/>
-                </div>
-                <div class="password">
-                    <span> Password </span> <input type="password" name="password"><br/>
-                </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
             </div>
-            <input class="sendbtn" type="submit">
-       </form>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+            </div>
+            <div class="result"></div>
+            <br/>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Log in</button>
+            <div id="emailHelp" class="form-text">Or <a href="/register">Register Now!</a></div>
+        </form>
     </div>
 
-    <div class="result"></div>
-
-    <div class='signup'><a href='/register'>Sign up</a></div>
-
-
     <script>
-        document.querySelector('.sendbtn').addEventListener('click', (e) => {
+        document.querySelector('.btn-primary').addEventListener('click', (e) => {
             e.preventDefault();
             const email    = document.getElementsByName('email')[0].value
             const password = document.getElementsByName('password')[0].value;
@@ -49,7 +50,6 @@
                 let resultDiv   = document.querySelector(".result");
 
                 if(result.email) {
-                    //resultDiv.innerHTML = "welcome, " + result.email + "!!";
                     window.location.href="/board";
                 } else if(xhr.status === 401) {
                     resultDiv.innerHTML = result;

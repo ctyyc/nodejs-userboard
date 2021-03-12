@@ -4,23 +4,49 @@
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/ui.css">
         <title>board list</title>
     </head>
     <body>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link disabled" tabindex="-1" aria-disabled="true"><%= userInfo[0].userName %>(<%= userInfo[0].EMAIL %>)님 반갑습니다^^</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/logout">logout</a>
+            </li>
+        </ul>
 
-    <header>
-        <div> <%= userInfo[0].userName %>(<%= userInfo[0].EMAIL %>)님 반갑습니다^^</div>
-        <div><a href="/logout">logout</a></div>
-    </header>
+        <div class="save-div">
+            <h1>Article List</h1>
+            <br/>
 
-    <h1>Board List</h1>
+            <!-- List -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">글 번호</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">등록일자</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i=0; i<data.length; i++){ %>
+                        <tr onClick="location.href='/board/detail/<%= data[i].articleNo %>'">
+                            <th scope="row"><%= data[i].articleNo %></th>
+                            <td><%= data[i].userName %></td>
+                            <td><%= data[i].articleTitle %></td>
+                            <td><%= data[i].regDate %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <!-- List End -->
 
-    <% for(let i=0; i<data.length; i++){ %>
-        <a href="/board/detail/<%= data[i].articleNo %>"><%= data[i].articleTitle %></a>
-        <br/>
-    <% } %>
-
-    <br/>
-    <a href="/board/save">Create Article</a>
+            <br/>
+            <a class="btn btn-outline-secondary" href="/board/save" role="button" style="float: right;">Create Article</a>
+        </div>
     </body>
 </html>

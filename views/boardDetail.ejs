@@ -4,28 +4,43 @@
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/ui.css">
         <title>board list</title>
     </head>
     <body>
+        <div class="save-div">
+            <h1>Article Deatil</h1>
 
-    <h1>Article Deatil</h1>
+            <br/>
 
-    <div>No. <%= data[0].articleNo %></div>
-    <div>Title : <%= data[0].articleTitle %></div>
-    <div>Contents : <%= data[0].articleContents %></div>
-    <div>RegDate : <%= data[0].regDate %></div>
-    <div>Author : <%= data[0].userName %>(<%= data[0].EMAIL %>)</div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">No. <%= data[0].articleNo %></div>
+                    <div class="col-10">Title : <%= data[0].articleTitle %></div>
+                </div>
+                <div class="row border-top">
+                    <div class="col">Author : <%= data[0].userName %>(<%= data[0].EMAIL %>)</div>
+                    <div class="col">RegDate : <%= data[0].regDate %></div>
+                </div>
+                <div class="row border-top">
+                    <div class="col-2">Contents :</div>
+                    <div class="col-10"><%= data[0].articleContents %></div>
+                </div>
+            </div>
 
-    <% if(data[0].userId === id) { %>
-        <br/>
-        <a href="/board/save/<%= data[0].articleNo %>">Update</a>
-        <br/>
-        <form action="/board/detail/<%= data[0].articleNo %>?_method=DELETE" method="POST">
-            <button>Delete</button>
-        </form>
-    <% } %>
+            <br/>
 
-    <br/>
-    <a href="/board">Go to list</a>
+            <div class="btn-align">
+                <% if(data[0].userId === id) { %>
+                    <a class="btn btn-outline-secondary" href="/board/save/<%= data[0].articleNo %>" role="button" style="margin-right: 5px;">Update</a>
+                    <form action="/board/detail/<%= data[0].articleNo %>?_method=DELETE" method="POST" style="margin-right: 5px;">
+                        <button class="btn btn-outline-danger">Delete</button>
+                    </form>
+                <% } %>
+
+                <a class="btn btn-secondary" href="/board" role="button">Go to list</a>
+            </div>
+        </div>
     </body>
 </html>

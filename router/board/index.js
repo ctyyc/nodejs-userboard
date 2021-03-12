@@ -14,7 +14,10 @@ router.get('/', function(req, res) {
 		db.query(`select * from user where userId = ?`, [id], (err1, userInfo) => {
 			if(err1) throw err1;
 
-			db.query(`select * from article`, (err2, rows) => {
+			db.query(`select 
+				EMAIL, userName, articleNo, articleTitle, articleContents, DATE_FORMAT(article.regDate, '%Y-%m-%d') as regDate, userId, userName
+				from article 
+				join user on authorId = userId`, (err2, rows) => {
 				if(err2) throw err2;
 	
 				res.render('boardList.ejs', {'userInfo': userInfo, data: rows});
@@ -25,7 +28,7 @@ router.get('/', function(req, res) {
 
 // Go to Save
 router.get('/save', function(req, res) {
-	res.render('boardSave.ejs');
+	res.render('boardSave.ejs', {data: ''});
 })
 
 router.get('/save/:articleNo', function(req, res) {
@@ -45,7 +48,8 @@ router.get('/detail/:articleNo', (req, res) => {
 	const id = req.user;
 	const articleNo = req.params.articleNo;
 
-	db.query(`select EMAIL, userName, articleNo, articleTitle, articleContents, article.regDate, userId
+	db.query(`select 
+		EMAIL, userName, articleNo, articleTitle, articleContents, DATE_FORMAT(article.regDate, '%Y-%m-%d') as regDate, userId
 		from article 
 		join user on authorId = userId 
 		where articleNo = ?`, [articleNo], (err, rows) => {
