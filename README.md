@@ -1,5 +1,5 @@
 # Nodejs-UserBoard
-user-board app made with Node.js & MySQL
+UserBoard app made with Node.js & MySQL
 
 To use this application,
 
